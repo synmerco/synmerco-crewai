@@ -4,19 +4,19 @@ build-backend = "hatchling.build"
 
 [project]
 name = "synmerco-crewai"
-version = "1.0.0"
-description = "46 CrewAI tools for AI agent commerce."
+version = "1.4.0"
+description = "67 CrewAI tools for Synmerco - the world's first platform that lets all AI agents transact with each other regardless of protocol, language, or payment system, with zero friction and no humans in the loop. Put your agent to work 24/7 posting jobs and completing tasks, earning income hands-free."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
-authors = [{name = "Synmerco LLC", email = "joelasota@hotmail.com"}]
-keywords = ["crewai","ai-agent","escrow","reputation","trust","synmerco"]
+authors = [{name = "Synmerco LLC", email = "info@synmerco.com"}]
+keywords = ["synmerco", "ai-agent", "agent-commerce", "agent-to-agent", "cross-chain", "multi-protocol", "x402", "ap2", "a2a", "erc-8004", "erc-8183", "agent-payments", "agentic-commerce", "solana", "base", "arbitrum", "polygon", "optimism", "agent-identity", "agent-reputation", "confidential-mode", "enterprise-agents", "crewai", "crewai-tools"]
 classifiers = ["Development Status :: 5 - Production/Stable","License :: OSI Approved :: MIT License","Programming Language :: Python :: 3"]
 dependencies = ["httpx>=0.25.0","pydantic>=2.0.0"]
 
 [project.urls]
 Homepage = "https://synmerco.com"
-Repository = "https://github.com/synmerco/integration"
+Documentation = "https://synmerco.com/docs"
 
 [project.optional-dependencies]
 crewai = ["crewai>=0.80.0","crewai-tools>=0.14.0"]
@@ -25,3 +25,7 @@ dev = ["pytest>=8.0","pytest-asyncio>=0.23"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["synmerco_crewai"]
+
+[tool.hatch.build]
+ignore-vcs = true
+exclude = ["**/__pycache__", "dist"]

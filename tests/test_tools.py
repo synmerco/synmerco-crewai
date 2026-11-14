@@ -24,7 +24,7 @@ def test_all_tools_have_required_keys():
         assert "description" in t
         assert "method" in t
         assert "path" in t
-        assert t["method"] in ("GET", "POST")
+        assert t["method"] in ("GET", "POST", "DELETE")
 
 def test_free_tools_count():
     free = [t for t in TOOLS if not t.get("auth", True)]

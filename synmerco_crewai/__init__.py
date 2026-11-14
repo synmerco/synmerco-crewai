@@ -1,4 +1,4 @@
-"""synmerco-crewai — 46 CrewAI tools for AI agent commerce.
+"""synmerco-crewai — 67 CrewAI tools for AI agent commerce.
 
 Two ways to use:
 
@@ -15,7 +15,7 @@ Two ways to use:
 from synmerco_crewai._factory import build_all_tools
 from synmerco_crewai._client import SynmercoHTTPClient, SynmercoAPIError
 
-__version__ = "1.0.0"
+__version__ = "1.4.0"
 __all__ = [
     "get_synmerco_tools",
     "get_synmerco_mcp_tools",
@@ -30,7 +30,7 @@ def get_synmerco_tools(
     timeout: float = 30.0,
     include_free_only: bool = False,
 ):
-    """Get all 46 Synmerco tools as CrewAI BaseTool instances.
+    """Get all 67 Synmerco tools as CrewAI BaseTool instances.
 
     Args:
         api_key: Your Synmerco API key. Also reads SYNMERCO_API_KEY env var.
@@ -44,7 +44,7 @@ def get_synmerco_tools(
     Example:
         >>> tools = get_synmerco_tools(api_key="sk_live_...")
         >>> len(tools)
-        46
+        67
     """
     return build_all_tools(
         api_key=api_key,

@@ -54,9 +54,15 @@ def _build_schema(tool_def: dict) -> Type[BaseModel]:
         elif ftype == "int":
             annotations[fname] = int if is_req else Optional[int]
             namespace[fname] = Field(..., description=desc) if is_req else Field(None, description=desc)
+        elif ftype == "bool":
+            annotations[fname] = bool if is_req else Optional[bool]
+            namespace[fname] = Field(..., description=desc) if is_req else Field(None, description=desc)
         elif ftype == "str_array":
             annotations[fname] = list[str] if is_req else Optional[list[str]]
             namespace[fname] = Field(..., description=desc, min_length=1) if is_req else Field(None, description=desc)
+        elif ftype == "json":
+            annotations[fname] = dict[str, Any] if is_req else Optional[dict[str, Any]]
+            namespace[fname] = Field(..., description=desc) if is_req else Field(None, description=desc)
         else:
             annotations[fname] = str if is_req else Optional[str]
             namespace[fname] = Field(..., description=desc) if is_req else Field(None, description=desc)
@@ -86,12 +92,15 @@ def _build_tool_class(tool_def: dict, http: SynmercoHTTPClient) -> Type[BaseTool
                 if ft == "did": kwargs[fn] = validate_did(v)
                 elif ft == "amount": kwargs[fn] = validate_amount(v)
                 elif ft == "sha256": kwargs[fn] = validate_sha256(v)
+                elif ft == "json" and isinstance(v, str): kwargs[fn] = json.loads(v)
             path = path_template
             for pp in path_params:
                 path = path.replace("{" + pp + "}", str(kwargs.pop(pp, "")))
             try:
                 if method == "GET":
                     result = http.get(path, **kwargs)
+                elif method == "DELETE":
+                    result = http.request("DELETE", path, params=kwargs)
                 else:
                     result = http.post(path, kwargs)
                 return json.dumps(result, indent=2, default=str)
